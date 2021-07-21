@@ -17,5 +17,23 @@
 (for_statement)    @loop.outer
 (while_statement)  @loop.outer
 
-(argument_list) @parameter.outer
-(parameter_list) @parameter.outer
+((subscript_expression
+  "," @_start . (_) @parameter.inner)
+ (#make-range! "parameter.outer" @_start @parameter.inner)) 
+((subscript_expression
+  . (_) @parameter.inner . ","? @_end)
+ (#make-range! "parameter.outer" @parameter.inner @_end)) 
+
+((argument_list
+  "," @_start . (_) @parameter.inner)
+ (#make-range! "parameter.outer" @_start @parameter.inner)) 
+((argument_list
+  . (_) @parameter.inner . ","? @_end)
+ (#make-range! "parameter.outer" @parameter.inner @_end)) 
+
+((parameter_list
+  "," @_start . (_) @parameter.inner)
+ (#make-range! "parameter.outer" @_start @parameter.inner)) 
+((parameter_list
+  . (_) @parameter.inner . ","? @_end)
+ (#make-range! "parameter.outer" @parameter.inner @_end)) 
