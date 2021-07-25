@@ -1,1 +1,1 @@
-; inherits: (jsx, javascript)
+; inherits: (javascript)
